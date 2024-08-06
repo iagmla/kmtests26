@@ -190,8 +190,6 @@ void printTriGraphs(struct tests *t) {
 void resultsTriGraph(struct tests *t) {
     int expected_max = (t->datalen + (17576 * 26 * 2)) / 17576 / 3;
     int expected_min = (t->datalen + (17576 * 1 * 1)) / 3 / ((17576 / 2) + 17576);
-    printf("min: %d\n", expected_min);
-    printf("max: %d\n", expected_max);
     for (int i = 0; i < 676; i++) {
         if ((t->trigraphOccurrences[i] >= expected_min) && (t->trigraphOccurrences[i] <= expected_max)) {
             t->trigraphResults[i] = 0;
