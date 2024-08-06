@@ -81,7 +81,7 @@ Chi-Squared Distribution 24.946409
 
 # Acceptable Test Failures
 
-The KEG Stream Cipher and A-Z output from /dev/urandom were compared and showed the same amount of test failures.  An example of acceptable test failure output is below:
+The KEG Stream Cipher and A-Z output from /dev/urandom were compared and showed the same amount of test failures.  An example of acceptable number of test failures for a 1 million letter output is below:
 
 Bi Graph DY 656 FAIL ------
 
