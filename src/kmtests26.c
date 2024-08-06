@@ -7,11 +7,11 @@
 #include "stats.c"
 #include "tests.c"
 
-/* kmtests26 v0.0.1 */
+/* kmtests26 v0.0.2 */
 /* by Karl Zander */
 
 void usage() {
-    printf("kmtests26 v0.0.1\n");
+    printf("kmtests26 v0.0.2\n");
     printf("Usage: kmtests26 <input file>\n");
 }
 
@@ -44,5 +44,6 @@ int main(int arc, char *argv[]) {
     testsInit(&t);
     runBiGraph(&t, inFilename);
     runTriGraph(&t, inFilename);
+    runPeriod(&t, inFilename);
     return 0;
 }

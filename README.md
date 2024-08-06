@@ -8,7 +8,7 @@ kmtests26 is a statistical program by KryptoMagick to test random A-Z ASCII data
 
 # Usage
 
-kmtests26 <filename> > output.file
+kmtests26 filename > output.file
 
 
 # Uniformly Random A-Z Data

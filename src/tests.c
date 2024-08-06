@@ -5,6 +5,7 @@ struct tests {
     int trigraphOccurrences[17576];
     int bigraphResults[676];
     int trigraphResults[17576];
+    int period;
     uint32_t datalen;
 };
 
@@ -205,4 +206,48 @@ void runTriGraph(struct tests *t, char *inFilename) {
     testTriGraph(t, inFilename);
     resultsTriGraph(t);
     printTriGraphs(t);
+}
+
+void testPeriod(struct tests *t, char *inFilename, int runLength) {
+    FILE *infile;
+    infile = fopen(inFilename, "rb");
+    fseek(infile, 0, SEEK_END);
+    uint32_t datalen = ftell(infile);
+    t->datalen = datalen;
+    fseek(infile, 0, SEEK_SET);
+    uint32_t runs = datalen / runLength;
+    uint32_t offset = 0;
+    for (uint32_t x = 0; x < runs; x++) {
+        fseek(infile, offset, 0);
+        uint8_t run[runLength];
+        uint8_t sample[runLength];
+        fread(run, 1, runLength, infile);
+        for (uint32_t y = 0; y < runs; y++) {
+            fread(sample, 1, runLength, infile);
+            if (memcmp(run, sample, runLength*sizeof(uint8_t)) == 0) {
+                t->period += 1;
+            }
+        }
+        offset += runLength;
+        runs -= runLength;
+    }
+    fclose(infile);
+}
+
+printPeriod(struct tests *t) {
+    if (t->period == 0) {
+        printf("Period %d PASS ------\n", t->period);
+    }
+    else {
+        printf("Period %d FAIL ------\n", t->period);
+    }
+}
+
+void runPeriod(struct tests *t, char *inFilename) {
+    int maxRun = 13;
+    int minRun = 8;
+    for (int i = maxRun; i != minRun - 1; i--) {
+        testPeriod(t, inFilename, i);
+    }
+    printPeriod(t);
 }
