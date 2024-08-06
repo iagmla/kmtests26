@@ -78,3 +78,71 @@ IC 25.999836
 Serial Correlation 0.000059
 
 Chi-Squared Distribution 24.946409
+
+# Acceptable Test Failures
+
+The KEG Stream Cipher and A-Z output from /dev/urandom were compared and showed the same amount of test failures.  An example of acceptable test failure output is below:
+
+Bi Graph DY 656 FAIL ------
+
+Bi Graph NI 652 FAIL ------
+
+Bi Graph RY 811 FAIL ------
+
+Bi Graph SC 818 FAIL ------
+
+Bi Graph UT 643 FAIL ------
+
+Bi Graph VS 655 FAIL ------
+
+Bi Graph XS 820 FAIL ------
+
+Tri Graph ABV 8 FAIL ------
+
+Tri Graph ACE 11 FAIL ------
+
+Tri Graph ACF 8 FAIL ------
+
+Tri Graph ACR 8 FAIL ------
+
+Tri Graph ACW 9 FAIL ------
+
+Tri Graph ADJ 8 FAIL ------
+
+Tri Graph ADY 11 FAIL ------
+
+Tri Graph AFE 10 FAIL ------
+
+Tri Graph AGJ 9 FAIL ------
+
+Tri Graph AHD 11 FAIL ------
+
+Tri Graph AIM 11 FAIL ------
+
+Tri Graph AJC 10 FAIL ------
+
+Tri Graph AJO 11 FAIL ------
+
+Tri Graph ALM 11 FAIL ------
+
+Tri Graph AOF 9 FAIL ------
+
+Tri Graph APV 11 FAIL ------
+
+Tri Graph AQU 10 FAIL ------
+
+Tri Graph ARF 11 FAIL ------
+
+Tri Graph ARY 10 FAIL ------
+
+Tri Graph ATC 11 FAIL ------
+
+Tri Graph AUK 11 FAIL ------
+
+Tri Graph AVN 10 FAIL ------
+
+Tri Graph AVT 9 FAIL ------
+
+Tri Graph AVV 9 FAIL ------
+
+Tri Graph AWU 7 FAIL ------
