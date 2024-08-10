@@ -6,6 +6,8 @@ struct tests {
     int bigraphResults[676];
     int trigraphResults[17576];
     int period;
+    int sums;
+    uint32_t avgSums;
     uint32_t datalen;
 };
 
@@ -234,7 +236,7 @@ void testPeriod(struct tests *t, char *inFilename, int runLength) {
     fclose(infile);
 }
 
-printPeriod(struct tests *t) {
+void printPeriod(struct tests *t) {
     if (t->period == 0) {
         printf("Period %d PASS ------\n", t->period);
     }
@@ -250,4 +252,65 @@ void runPeriod(struct tests *t, char *inFilename) {
         testPeriod(t, inFilename, i);
     }
     printPeriod(t);
+}
+
+void testSums(int *sums, char *inFilename, int blockLength) {
+    FILE *infile;
+    infile = fopen(inFilename, "rb");
+    fseek(infile, 0, SEEK_END);
+    uint32_t datalen = ftell(infile);
+    fseek(infile, 0, SEEK_SET);
+    uint8_t block[26];
+    int index;
+    uint32_t blocks = datalen / blockLength;
+    for (int i = 0; i < blocks; i++) {
+        fread(block, 1, blockLength, infile);
+        int blockSum = 0;
+        for (int x = 0; x < blockLength; x++) {
+            blockSum += (block[x] - 65);
+        }
+        sums[i] = blockSum;
+    }
+    fclose(infile);
+}
+
+void printSums(struct tests *t) {
+    int sqrtSums = sqrt(sqrt(t->datalen));
+    int threshold = sqrtSums + 26;
+    if (t->sums <= threshold) {
+        printf("Sums %d PASS ------\n", t->sums);
+    }
+    else {
+        printf("Sums %d FAIL ------\n", t->sums);
+    }
+}
+
+void printavgSums(struct tests *t) {
+    int max = ((26 * 26) / 2) - 13;
+    int min = (((26 * 26) / 2) - 13) - 5;
+    if ((t->avgSums <= max) || (t->avgSums >= min)) {
+        printf("AvgSums %d PASS ------\n", t->avgSums);
+    }
+    else {
+        printf("AvgSums %d FAIL ------\n", t->avgSums);
+    }
+}
+
+void runSums(struct tests *t, char *inFilename) {
+    int blockLength = 26;
+    int max = ((26 * 26) / 2) + (26 * 5);
+    int min = (((26 *26) / 2) - (26 * 5));
+    int sums[t->datalen / blockLength];
+    t->sums = 0;
+    t->avgSums = 0;
+    testSums(sums, inFilename, blockLength);
+    for (int i = 0; i < t->datalen / blockLength; i++) {
+        if ((sums[i] > max) || (sums[i] < min)) {
+            t->sums += 1;
+        }
+        t->avgSums += sums[i];
+    }
+    t->avgSums = t->avgSums / (t->datalen / blockLength);
+    printSums(t);
+    printavgSums(t);
 }
