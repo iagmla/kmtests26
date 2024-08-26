@@ -7,11 +7,11 @@
 #include "stats.c"
 #include "tests.c"
 
-/* kmtests26 v0.0.3 */
+/* kmtests26 v0.0.4 */
 /* by Karl Zander */
 
 void usage() {
-    printf("kmtests26 v0.0.3\n");
+    printf("kmtests26 v0.0.4\n");
     printf("Usage: kmtests26 <input file>\n");
 }
 
